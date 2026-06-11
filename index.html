@@ -8,20 +8,51 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#1a1a1a;min-height:100vh}
+
+/* Topbar */
 .topbar{background:#0d0d1a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
-.topbar-left{display:flex;align-items:center;gap:12px}
 .brand{color:#fff;font-size:14px;font-weight:600;letter-spacing:0.5px}
 .brand-sub{color:rgba(255,255,255,0.5);font-size:11px;margin-top:1px}
 .scl-tag{color:rgba(255,255,255,0.6);font-size:11px}
+
+/* Personal/Business toggle */
+.lease-type-bar{background:#fff;border-bottom:1px solid #e5e5e5;padding:16px 24px;display:flex;align-items:center;gap:16px}
+.lease-type-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px}
+.toggle-wrap{display:flex;align-items:center;gap:10px}
+.toggle-opt{font-size:13px;font-weight:500;color:#999;cursor:pointer;transition:color 0.2s}
+.toggle-opt.active{color:#0d0d1a}
+.toggle-track{width:52px;height:28px;background:#ddd;border-radius:14px;cursor:pointer;position:relative;transition:background 0.25s;flex-shrink:0}
+.toggle-track.business{background:#0d0d1a}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.toggle-track.business .toggle-thumb{transform:translateX(24px)}
+.vat-note{font-size:11px;color:#888;margin-left:8px}
+
+/* Container */
 .container{max-width:1100px;margin:0 auto;padding:24px}
 .page{display:none}.page.active{display:block}
 
-/* Config page */
+/* Vehicle selector */
+.vehicle-select-wrap{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;margin-bottom:0}
+.vehicle-select-wrap h2{font-size:14px;font-weight:600;color:#0d0d1a;margin-bottom:14px}
+.vehicle-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vehicle-card{border:2px solid #e5e5e5;border-radius:10px;padding:14px 16px;cursor:pointer;transition:all 0.15s;background:#fff}
+.vehicle-card:hover{border-color:#aaa;background:#fafafa}
+.vehicle-card.selected{border-color:#0d0d1a;background:#f8f8ff}
+.vehicle-card-name{font-size:13px;font-weight:600;color:#0d0d1a;line-height:1.4}
+.vehicle-card-sub{font-size:11px;color:#888;margin-top:3px}
+.vehicle-card-badge{display:inline-block;margin-top:6px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:#f0f0f0;color:#555}
+.vehicle-card.selected .vehicle-card-badge{background:#0d0d1a;color:#fff}
+
+/* Config layout */
+.config-area{display:none;margin-top:20px}
+.config-area.visible{display:block}
 .grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
 .left{display:flex;flex-direction:column;gap:16px}
+
 .imgbox{border-radius:12px;border:1px solid #e5e5e5;overflow:hidden;background:#e8eef5;min-height:220px;display:flex;align-items:center;justify-content:center}
 .imgbox img{width:100%;display:block;object-fit:cover}
 .imgfail{text-align:center;padding:2rem;color:#888;font-size:13px}
+
 .cartitle{font-size:18px;font-weight:600;color:#0d0d1a}
 .carsub{font-size:12px;color:#666;margin-top:4px}
 .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px}
@@ -49,7 +80,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .colour-opt-price.extra{color:#0d0d1a;font-weight:500}
 .colour-swatch{width:16px;height:16px;border-radius:50%;border:1px solid #ddd;flex-shrink:0}
 
-/* Summary card */
+/* Summary */
 .sumcard{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;position:sticky;top:16px}
 .sumtitle{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:14px}
 .srow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
@@ -57,19 +88,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .slbl{color:#666}
 .sval{color:#0d0d1a;font-weight:500;text-align:right}
 .inc{font-size:11px;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:10px}
+.biz-badge{font-size:11px;color:#1d4ed8;background:#dbeafe;padding:2px 8px;border-radius:10px}
 .mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
 .mrow input[type=checkbox]{accent-color:#0d0d1a;width:14px;height:14px}
 .pblock{margin-top:14px;padding-top:14px;border-top:1px solid #e5e5e5}
 .plbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.6px}
 .pval{font-size:30px;font-weight:600;color:#0d0d1a;margin-top:2px}
 .pmo{font-size:12px;color:#888}
+.pmo-vat{font-size:11px;color:#1d4ed8;background:#dbeafe;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px}
 .enqbtn{width:100%;margin-top:14px;padding:12px;background:#0d0d1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.15s}
 .enqbtn:hover{opacity:0.85}
 
-/* Enquiry form */
+/* Enquiry */
 .fw{max-width:660px}
 .ftitle{font-size:20px;font-weight:600;margin-bottom:6px;color:#0d0d1a}
-.fsub{font-size:13px;color:#666;margin-bottom:24px}
+.fsub{font-size:13px;color:#666;margin-bottom:20px}
 .alert-box{background:#fff8e1;border:1px solid #f59e0b;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400e;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
 .alert-box i{font-size:16px;margin-top:1px;flex-shrink:0;color:#f59e0b}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
@@ -81,8 +114,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{outline:none;border-color:#0d0d1a}
 .fgrp input[readonly]{background:#f8f8f8;color:#666}
 .fgrp textarea{resize:vertical;min-height:80px}
-.deal-summary-box{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px;margin-bottom:14px}
-.deal-summary-box .ds-title{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px}
+.deal-box{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px;margin-bottom:14px}
+.deal-box .ds-title{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px}
 .subbtn{padding:11px 28px;background:#0d0d1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}
 .subbtn:hover{opacity:0.85}
 .backbtn{padding:11px 22px;background:#fff;color:#333;border:1px solid #d5d5d5;border-radius:8px;font-size:14px;cursor:pointer;margin-right:10px;margin-top:4px}
@@ -94,207 +127,186 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ss{font-size:14px;color:#666;line-height:1.6}
 .success-icon{width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
 .success-icon i{font-size:32px;color:#15803d}
+
+/* Animate config area in */
+.config-area{opacity:0;transform:translateY(8px);transition:opacity 0.3s,transform 0.3s}
+.config-area.visible{display:block;opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="topbar-left">
-    <div>
-      <div class="brand">AION Dealer Portal</div>
-      <div class="brand-sub">Select Car Leasing</div>
-    </div>
+  <div>
+    <div class="brand">AION Dealer Portal</div>
+    <div class="brand-sub">Select Car Leasing</div>
   </div>
   <div class="scl-tag">Dealer pricing tool — internal use only</div>
+</div>
+
+<!-- Personal / Business toggle -->
+<div class="lease-type-bar">
+  <span class="lease-type-label">Lease type</span>
+  <div class="toggle-wrap">
+    <span class="toggle-opt active" id="lbl-personal" onclick="setLeaseType('personal')">Personal</span>
+    <div class="toggle-track" id="lease-toggle" onclick="toggleLease()">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span class="toggle-opt" id="lbl-business" onclick="setLeaseType('business')">Business</span>
+    <span class="vat-note" id="vat-note" style="display:none">Prices shown exc. VAT</span>
+  </div>
 </div>
 
 <div class="container">
 
 <!-- PAGE 1: CONFIG -->
 <div id="p1" class="page active">
-  <div class="grid">
-    <div class="left">
-      <div class="imgbox" id="imgbox">
-        <div class="imgfail" id="imgfail"><i class="ti ti-car" style="font-size:36px;display:block;margin-bottom:8px"></i>AION V SUV 2026</div>
+
+  <!-- Vehicle selector -->
+  <div class="vehicle-select-wrap">
+    <h2>Select vehicle</h2>
+    <div class="vehicle-options">
+      <div class="vehicle-card" id="vc-standard" onclick="selectVehicle('standard')">
+        <div class="vehicle-card-name">AION V SUV 150kW Advanced 75kWh 5dr Auto</div>
+        <div class="vehicle-card-sub">2026 · Electric · Auto</div>
+        <span class="vehicle-card-badge">Standard</span>
       </div>
-
-      <div>
-        <div class="cartitle">AION V SUV</div>
-        <div class="carsub">150kW Advanced 75kWh 5dr Auto [2026] &nbsp;·&nbsp; Personal Contract Hire</div>
+      <div class="vehicle-card" id="vc-exec" onclick="selectVehicle('exec')">
+        <div class="vehicle-card-name">AION V SUV 150kW Advanced 75kWh 5dr Auto</div>
+        <div class="vehicle-card-sub">2026 · Electric · Auto</div>
+        <span class="vehicle-card-badge">Executive Pack</span>
       </div>
-
-      <div class="card">
-        <div class="clabel">Contract length</div>
-        <div class="pills">
-          <span class="pill" data-g="term" data-v="24" onclick="setPill(this,'term')">24 months</span>
-          <span class="pill" data-g="term" data-v="36" onclick="setPill(this,'term')">36 months</span>
-          <span class="pill on" data-g="term" data-v="48" onclick="setPill(this,'term')">48 months</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="clabel">Annual mileage</div>
-        <div class="pills">
-          <span class="pill" data-g="mileage" data-v="5000" onclick="setPill(this,'mileage')">5,000</span>
-          <span class="pill" data-g="mileage" data-v="8000" onclick="setPill(this,'mileage')">8,000</span>
-          <span class="pill" data-g="mileage" data-v="10000" onclick="setPill(this,'mileage')">10,000</span>
-          <span class="pill" data-g="mileage" data-v="15000" onclick="setPill(this,'mileage')">15,000</span>
-          <span class="pill" data-g="mileage" data-v="20000" onclick="setPill(this,'mileage')">20,000</span>
-          <span class="pill on" data-g="mileage" data-v="25000" onclick="setPill(this,'mileage')">25,000</span>
-          <span class="pill" data-g="mileage" data-v="30000" onclick="setPill(this,'mileage')">30,000</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="clabel">Initial payment (months)</div>
-        <div class="pills">
-          <span class="pill" data-g="initial" data-v="1" onclick="setPill(this,'initial')">1</span>
-          <span class="pill" data-g="initial" data-v="3" onclick="setPill(this,'initial')">3</span>
-          <span class="pill" data-g="initial" data-v="6" onclick="setPill(this,'initial')">6</span>
-          <span class="pill" data-g="initial" data-v="9" onclick="setPill(this,'initial')">9</span>
-          <span class="pill on" data-g="initial" data-v="12" onclick="setPill(this,'initial')">12</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="clabel">Maintenance</div>
-        <div class="rgrp">
-          <label class="ropt"><input type="radio" name="maint" value="yes" onchange="setMaint(this)"> Yes — included</label>
-          <label class="ropt"><input type="radio" name="maint" value="no" checked onchange="setMaint(this)"> No</label>
-        </div>
-      </div>
-
-      <!-- Colour & Options -->
-      <div class="card">
-        <div class="clabel">Colour, trim and options</div>
-        <button class="colour-btn" onclick="toggleColour()" id="colour-toggle-btn">
-          <i class="ti ti-palette"></i> <span id="colour-btn-label">Select colour, trim and options</span>
-          <i class="ti ti-chevron-down" id="colour-chevron" style="margin-left:auto"></i>
-        </button>
-
-        <div class="colour-panel" id="colour-panel">
-
-          <!-- Paint Metallic -->
-          <div class="colour-section">
-            <div class="colour-section-title">Paint — Metallic</div>
-            <label class="colour-opt">
-              <input type="radio" name="colour" value="0" data-label="Arctic White" onchange="setColour(this)">
-              <span class="colour-swatch" style="background:#f0f0f0"></span>
-              <span class="colour-opt-name">Arctic White</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-            <label class="colour-opt">
-              <input type="radio" name="colour" value="0" data-label="Wilderness Sand" onchange="setColour(this)">
-              <span class="colour-swatch" style="background:#c4a882"></span>
-              <span class="colour-opt-name">Wilderness Sand</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-          <!-- Paint Special -->
-          <div class="colour-section">
-            <div class="colour-section-title">Paint — Special</div>
-            <label class="colour-opt">
-              <input type="radio" name="colour" value="11.02" data-label="Galaxy Blue" onchange="setColour(this)">
-              <span class="colour-swatch" style="background:#1e3a5f"></span>
-              <span class="colour-opt-name">Special Metallic — Galaxy Blue</span>
-              <span class="colour-opt-price extra">+£11.02 p/m</span>
-            </label>
-            <label class="colour-opt">
-              <input type="radio" name="colour" value="11.02" data-label="Night Shadow Black" onchange="setColour(this)">
-              <span class="colour-swatch" style="background:#1a1a1a"></span>
-              <span class="colour-opt-name">Metallic — Night Shadow Black</span>
-              <span class="colour-opt-price extra">+£11.02 p/m</span>
-            </label>
-            <label class="colour-opt">
-              <input type="radio" name="colour" value="11.02" data-label="Sea Fluorescent" onchange="setColour(this)">
-              <span class="colour-swatch" style="background:#00bcd4"></span>
-              <span class="colour-opt-name">Special Metallic — Sea Fluorescent</span>
-              <span class="colour-opt-price extra">+£11.02 p/m</span>
-            </label>
-          </div>
-
-          <!-- Trim -->
-          <div class="colour-section">
-            <div class="colour-section-title">Trim</div>
-            <label class="colour-opt">
-              <input type="radio" name="trim" value="0" data-label="Leatherette Black" checked onchange="upd()">
-              <span class="colour-opt-name">Leatherette black with straight flute design</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-          <!-- Packs -->
-          <div class="colour-section">
-            <div class="colour-section-title">Packs</div>
-            <label class="colour-opt">
-              <input type="radio" name="packs" value="0" data-label="None" checked onchange="upd()">
-              <span class="colour-opt-name">None</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-          <!-- Exterior -->
-          <div class="colour-section">
-            <div class="colour-section-title">Exterior</div>
-            <label class="colour-opt">
-              <input type="radio" name="exterior" value="0" data-label="None" checked onchange="upd()">
-              <span class="colour-opt-name">None</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-          <!-- Interior -->
-          <div class="colour-section">
-            <div class="colour-section-title">Interior</div>
-            <label class="colour-opt">
-              <input type="radio" name="interior" value="0" data-label="None" checked onchange="upd()">
-              <span class="colour-opt-name">None</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-          <!-- Equipment -->
-          <div class="colour-section">
-            <div class="colour-section-title">Equipment</div>
-            <label class="colour-opt">
-              <input type="radio" name="equipment" value="0" data-label="None" checked onchange="upd()">
-              <span class="colour-opt-name">None</span>
-              <span class="colour-opt-price">£0.00</span>
-            </label>
-          </div>
-
-        </div>
-      </div>
-
     </div>
+  </div>
 
-    <!-- Summary -->
-    <div>
-      <div class="sumcard">
-        <div class="sumtitle">Your deal summary</div>
-        <div class="srow"><span class="slbl">Lease type</span><span class="sval">Personal Contract Hire</span></div>
-        <div class="srow"><span class="slbl">P11D value</span><span class="sval">£37,880.00</span></div>
-        <div class="srow"><span class="slbl">Initial payment</span><span class="sval" id="s-init">12 months</span></div>
-        <div class="srow"><span class="slbl">Contract length</span><span class="sval" id="s-term">48 months</span></div>
-        <div class="srow"><span class="slbl">Annual mileage</span><span class="sval" id="s-mile">25,000 miles</span></div>
-        <div class="srow"><span class="slbl">Colour</span><span class="sval" id="s-colour">Arctic White</span></div>
-        <div class="mrow">
-          <span class="slbl">Maintenance plan</span>
-          <span style="display:flex;align-items:center;gap:7px">
-            <input type="checkbox" id="mchk" disabled>
-            <span class="sval" id="s-mval" style="font-size:12px">—</span>
-          </span>
+  <!-- Config area — hidden until vehicle selected -->
+  <div class="config-area" id="config-area">
+    <div class="grid">
+      <div class="left">
+
+        <div class="imgbox" id="imgbox">
+          <div class="imgfail" id="imgfail"><i class="ti ti-car" style="font-size:36px;display:block;margin-bottom:8px"></i>AION V SUV 2026</div>
         </div>
-        <div class="srow"><span class="slbl">Arrangement fee</span><span class="sval">£0.00</span></div>
-        <div class="srow"><span class="slbl">Road tax</span><span class="sval"><span class="inc">Included</span></span></div>
-        <div class="srow"><span class="slbl">Breakdown cover</span><span class="sval"><span class="inc">Included</span></span></div>
-        <div class="pblock">
-          <div class="plbl">Guide price</div>
-          <div class="pval" id="s-price">£635.15</div>
-          <div class="pmo">per month inc. VAT</div>
+
+        <div>
+          <div class="cartitle" id="car-title">AION V SUV</div>
+          <div class="carsub" id="car-sub">150kW Advanced 75kWh 5dr Auto [2026]</div>
         </div>
-        <button class="enqbtn" onclick="goEnq()">Send enquiry →</button>
+
+        <div class="card">
+          <div class="clabel">Contract length</div>
+          <div class="pills">
+            <span class="pill" data-g="term" data-v="24" onclick="setPill(this,'term')">24 months</span>
+            <span class="pill" data-g="term" data-v="36" onclick="setPill(this,'term')">36 months</span>
+            <span class="pill on" data-g="term" data-v="48" onclick="setPill(this,'term')">48 months</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="clabel">Annual mileage</div>
+          <div class="pills">
+            <span class="pill" data-g="mileage" data-v="5000" onclick="setPill(this,'mileage')">5,000</span>
+            <span class="pill" data-g="mileage" data-v="8000" onclick="setPill(this,'mileage')">8,000</span>
+            <span class="pill" data-g="mileage" data-v="10000" onclick="setPill(this,'mileage')">10,000</span>
+            <span class="pill" data-g="mileage" data-v="15000" onclick="setPill(this,'mileage')">15,000</span>
+            <span class="pill" data-g="mileage" data-v="20000" onclick="setPill(this,'mileage')">20,000</span>
+            <span class="pill on" data-g="mileage" data-v="25000" onclick="setPill(this,'mileage')">25,000</span>
+            <span class="pill" data-g="mileage" data-v="30000" onclick="setPill(this,'mileage')">30,000</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="clabel">Initial payment (months)</div>
+          <div class="pills">
+            <span class="pill" data-g="initial" data-v="1" onclick="setPill(this,'initial')">1</span>
+            <span class="pill" data-g="initial" data-v="3" onclick="setPill(this,'initial')">3</span>
+            <span class="pill" data-g="initial" data-v="6" onclick="setPill(this,'initial')">6</span>
+            <span class="pill" data-g="initial" data-v="9" onclick="setPill(this,'initial')">9</span>
+            <span class="pill on" data-g="initial" data-v="12" onclick="setPill(this,'initial')">12</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="clabel">Maintenance</div>
+          <div class="rgrp">
+            <label class="ropt"><input type="radio" name="maint" value="yes" onchange="setMaint(this)"> Yes — included</label>
+            <label class="ropt"><input type="radio" name="maint" value="no" checked onchange="setMaint(this)"> No</label>
+          </div>
+        </div>
+
+        <!-- Colour & Options -->
+        <div class="card">
+          <div class="clabel">Colour, trim and options</div>
+          <button class="colour-btn" onclick="toggleColour()">
+            <i class="ti ti-palette"></i>
+            <span id="colour-btn-label">Select colour, trim and options</span>
+            <i class="ti ti-chevron-down" id="colour-chevron" style="margin-left:auto"></i>
+          </button>
+          <div class="colour-panel" id="colour-panel">
+            <div class="colour-section">
+              <div class="colour-section-title">Paint — Metallic</div>
+              <label class="colour-opt"><input type="radio" name="colour" value="0" data-label="Arctic White" onchange="setColour(this)" checked><span class="colour-swatch" style="background:#f0f0f0"></span><span class="colour-opt-name">Arctic White</span><span class="colour-opt-price">£0.00</span></label>
+              <label class="colour-opt"><input type="radio" name="colour" value="0" data-label="Wilderness Sand" onchange="setColour(this)"><span class="colour-swatch" style="background:#c4a882"></span><span class="colour-opt-name">Wilderness Sand</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Paint — Special</div>
+              <label class="colour-opt"><input type="radio" name="colour" value="11.02" data-label="Galaxy Blue" onchange="setColour(this)"><span class="colour-swatch" style="background:#1e3a5f"></span><span class="colour-opt-name">Special Metallic — Galaxy Blue</span><span class="colour-opt-price extra">+£11.02 p/m</span></label>
+              <label class="colour-opt"><input type="radio" name="colour" value="11.02" data-label="Night Shadow Black" onchange="setColour(this)"><span class="colour-swatch" style="background:#1a1a1a"></span><span class="colour-opt-name">Metallic — Night Shadow Black</span><span class="colour-opt-price extra">+£11.02 p/m</span></label>
+              <label class="colour-opt"><input type="radio" name="colour" value="11.02" data-label="Sea Fluorescent" onchange="setColour(this)"><span class="colour-swatch" style="background:#00bcd4"></span><span class="colour-opt-name">Special Metallic — Sea Fluorescent</span><span class="colour-opt-price extra">+£11.02 p/m</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Trim</div>
+              <label class="colour-opt"><input type="radio" name="trim" value="0" checked onchange="upd()"><span class="colour-opt-name">Leatherette black with straight flute design</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Packs</div>
+              <label class="colour-opt"><input type="radio" name="packs" value="0" checked onchange="upd()"><span class="colour-opt-name">None</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Exterior</div>
+              <label class="colour-opt"><input type="radio" name="exterior" value="0" checked onchange="upd()"><span class="colour-opt-name">None</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Interior</div>
+              <label class="colour-opt"><input type="radio" name="interior" value="0" checked onchange="upd()"><span class="colour-opt-name">None</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+            <div class="colour-section">
+              <div class="colour-section-title">Equipment</div>
+              <label class="colour-opt"><input type="radio" name="equipment" value="0" checked onchange="upd()"><span class="colour-opt-name">None</span><span class="colour-opt-price">£0.00</span></label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Summary panel -->
+      <div>
+        <div class="sumcard">
+          <div class="sumtitle">Your deal summary</div>
+          <div class="srow"><span class="slbl">Lease type</span><span class="sval" id="s-lease">Personal Contract Hire</span></div>
+          <div class="srow"><span class="slbl">Vehicle</span><span class="sval" id="s-vehicle">—</span></div>
+          <div class="srow"><span class="slbl">P11D value</span><span class="sval" id="s-p11d">£37,880.00</span></div>
+          <div class="srow"><span class="slbl">Initial payment</span><span class="sval" id="s-init">12 months</span></div>
+          <div class="srow"><span class="slbl">Contract length</span><span class="sval" id="s-term">48 months</span></div>
+          <div class="srow"><span class="slbl">Annual mileage</span><span class="sval" id="s-mile">25,000 miles</span></div>
+          <div class="srow"><span class="slbl">Colour</span><span class="sval" id="s-colour">Arctic White</span></div>
+          <div class="mrow">
+            <span class="slbl">Maintenance plan</span>
+            <span style="display:flex;align-items:center;gap:7px">
+              <input type="checkbox" id="mchk" disabled>
+              <span class="sval" id="s-mval" style="font-size:12px">—</span>
+            </span>
+          </div>
+          <div class="srow"><span class="slbl">Arrangement fee</span><span class="sval">£0.00</span></div>
+          <div class="srow"><span class="slbl">Road tax</span><span class="sval"><span class="inc">Included</span></span></div>
+          <div class="srow"><span class="slbl">Breakdown cover</span><span class="sval"><span class="inc">Included</span></span></div>
+          <div class="pblock">
+            <div class="plbl">Guide price</div>
+            <div class="pval" id="s-price">£635.15</div>
+            <div class="pmo" id="s-pmo">per month inc. VAT</div>
+            <div class="pmo-vat" id="s-vat-note" style="display:none">Business pricing exc. VAT</div>
+          </div>
+          <button class="enqbtn" onclick="goEnq()">Send enquiry →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -305,21 +317,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="fw">
     <div class="ftitle">Sales enquiry form</div>
     <div class="fsub">Complete the details below and submit to the leasing team.</div>
-
     <div class="alert-box">
       <i class="ti ti-info-circle"></i>
       <span>Please inform the customer, as they pass their details on, that someone from <strong>Select Car Leasing</strong> will contact them to arrange the finance.</span>
     </div>
-
     <div class="frow">
       <div class="fgrp"><label>Salesperson name</label><input type="text" placeholder="Full name"></div>
-      <div class="fgrp">
-        <label>Dealer</label>
-        <select>
-          <option value="">— Select dealer —</option>
-          <option>Dealer A</option>
-          <option>Dealer B</option>
-        </select>
+      <div class="fgrp"><label>Dealer</label>
+        <select><option value="">— Select dealer —</option><option>Dealer A</option><option>Dealer B</option></select>
       </div>
     </div>
     <div class="frow">
@@ -332,11 +337,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <select><option>Personal Contract Hire</option><option>Business Contract Hire</option></select>
       </div>
     </div>
-
-    <div class="deal-summary-box">
+    <div class="deal-box">
       <div class="ds-title">Deal details</div>
       <div class="frow three" style="margin-bottom:0">
-        <div class="fgrp"><label>Vehicle</label><input type="text" value="AION V SUV 150kW Advanced" readonly></div>
+        <div class="fgrp"><label>Vehicle</label><input type="text" id="e-vehicle" readonly></div>
         <div class="fgrp"><label>Term</label><input type="text" id="e-term" readonly></div>
         <div class="fgrp"><label>Annual mileage</label><input type="text" id="e-mile" readonly></div>
       </div>
@@ -345,11 +349,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fgrp"><label>Monthly price</label><input type="text" id="e-price" readonly></div>
       </div>
     </div>
-
     <div class="frow full">
       <div class="fgrp"><label>Additional notes</label><textarea placeholder="Any specific customer requirements, timeline, questions…"></textarea></div>
     </div>
-
     <div>
       <button class="backbtn" onclick="goBack()">← Back to pricing</button>
       <button class="subbtn" onclick="goSuccess()">Submit enquiry</button>
@@ -368,77 +370,152 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-</div>
+</div><!-- /container -->
 
 <script>
-var state={term:48,mileage:25000,initial:12,maint:false,colourCost:0,colourLabel:'Arctic White'};
-var bp={
-  24:{5000:720,8000:710,10000:695,15000:675,20000:660,25000:648,30000:635},
-  36:{5000:690,8000:678,10000:665,15000:648,20000:635,25000:622,30000:608},
-  48:{5000:680,8000:665,10000:650,15000:640,20000:638,25000:635,30000:620}
+var VAT = 1.2;
+var state = {
+  term: 48, mileage: 25000, initial: 12, maint: false,
+  colourCost: 0, colourLabel: 'Arctic White',
+  vehicle: null, leaseType: 'personal'
 };
-var mc=75.48;
+
+var vehicles = {
+  standard: {
+    name: 'AION V SUV 150kW Advanced 75kWh 5dr Auto',
+    sub: '150kW Advanced 75kWh 5dr Auto [2026]',
+    p11d: '£37,880.00',
+    shortName: 'AION V SUV — Standard'
+  },
+  exec: {
+    name: 'AION V SUV 150kW Advanced 75kWh 5dr Auto [Executive Pack]',
+    sub: '150kW Advanced 75kWh 5dr Auto [Executive Pack] [2026]',
+    p11d: '£37,880.00',
+    shortName: 'AION V SUV — Executive Pack'
+  }
+};
+
+var bp = {
+  24: {5000:720,8000:710,10000:695,15000:675,20000:660,25000:648,30000:635},
+  36: {5000:690,8000:678,10000:665,15000:648,20000:635,25000:622,30000:608},
+  48: {5000:680,8000:665,10000:650,15000:640,20000:638,25000:635,30000:620}
+};
+var mc = 75.48;
+
+function selectVehicle(v) {
+  state.vehicle = v;
+  document.querySelectorAll('.vehicle-card').forEach(function(c){c.classList.remove('selected')});
+  document.getElementById('vc-'+v).classList.add('selected');
+  var vd = vehicles[v];
+  document.getElementById('car-title').textContent = 'AION V SUV' + (v==='exec' ? ' — Executive Pack' : '');
+  document.getElementById('car-sub').textContent = vd.sub;
+  document.getElementById('s-vehicle').textContent = v==='exec' ? 'Executive Pack' : 'Standard';
+  document.getElementById('s-p11d').textContent = vd.p11d;
+  var ca = document.getElementById('config-area');
+  ca.style.display = 'block';
+  setTimeout(function(){ca.classList.add('visible')}, 10);
+  loadImage();
+  upd();
+}
+
+function loadImage() {
+  var img = new Image();
+  img.onload = function(){
+    var box = document.getElementById('imgbox');
+    box.innerHTML = '';
+    img.style.cssText = 'width:100%;max-height:260px;object-fit:cover;display:block';
+    box.appendChild(img);
+  };
+  img.src = 'https://cdn.imagin.studio/getImage?customer=selectcarleasing&make=aion&modelFamily=v&modelYear=2026&angle=23';
+}
+
+function toggleLease() {
+  setLeaseType(state.leaseType === 'personal' ? 'business' : 'personal');
+}
+
+function setLeaseType(t) {
+  state.leaseType = t;
+  var track = document.getElementById('lease-toggle');
+  var lblP = document.getElementById('lbl-personal');
+  var lblB = document.getElementById('lbl-business');
+  var vatNote = document.getElementById('vat-note');
+  if(t === 'business') {
+    track.classList.add('business');
+    lblP.classList.remove('active'); lblB.classList.add('active');
+    vatNote.style.display = 'inline';
+    document.getElementById('s-vat-note').style.display = 'inline-block';
+    document.getElementById('s-pmo').textContent = 'per month exc. VAT';
+    document.getElementById('s-lease').textContent = 'Business Contract Hire';
+  } else {
+    track.classList.remove('business');
+    lblP.classList.add('active'); lblB.classList.remove('active');
+    vatNote.style.display = 'none';
+    document.getElementById('s-vat-note').style.display = 'none';
+    document.getElementById('s-pmo').textContent = 'per month inc. VAT';
+    document.getElementById('s-lease').textContent = 'Personal Contract Hire';
+  }
+  upd();
+}
 
 function setPill(el,g){
   document.querySelectorAll('[data-g="'+g+'"]').forEach(function(p){p.classList.remove('on')});
   el.classList.add('on');
-  state[g]=parseInt(el.dataset.v);
+  state[g] = parseInt(el.dataset.v);
   upd();
 }
-function setMaint(el){state.maint=el.value==='yes';upd();}
+
+function setMaint(el){ state.maint = el.value==='yes'; upd(); }
+
 function setColour(el){
-  state.colourCost=parseFloat(el.value)||0;
-  state.colourLabel=el.dataset.label;
+  state.colourCost = parseFloat(el.value)||0;
+  state.colourLabel = el.dataset.label;
   upd();
 }
+
 function toggleColour(){
-  var panel=document.getElementById('colour-panel');
-  var chevron=document.getElementById('colour-chevron');
+  var panel = document.getElementById('colour-panel');
+  var chev = document.getElementById('colour-chevron');
   panel.classList.toggle('open');
-  chevron.className=panel.classList.contains('open')?'ti ti-chevron-up':'ti ti-chevron-down';
-  chevron.style.marginLeft='auto';
+  chev.className = panel.classList.contains('open') ? 'ti ti-chevron-up' : 'ti ti-chevron-down';
+  chev.style.marginLeft = 'auto';
 }
+
+function getBasePrice(){
+  return (bp[state.term] && bp[state.term][state.mileage]) ? bp[state.term][state.mileage] : 635.15;
+}
+
 function upd(){
-  document.getElementById('s-init').textContent=state.initial+' months';
-  document.getElementById('s-term').textContent=state.term+' months';
-  document.getElementById('s-mile').textContent=state.mileage.toLocaleString()+' miles';
-  document.getElementById('s-colour').textContent=state.colourLabel+(state.colourCost>0?' (+£'+state.colourCost.toFixed(2)+' p/m)':'');
-  var ck=document.getElementById('mchk'),mv=document.getElementById('s-mval');
+  document.getElementById('s-init').textContent = state.initial+' months';
+  document.getElementById('s-term').textContent = state.term+' months';
+  document.getElementById('s-mile').textContent = state.mileage.toLocaleString()+' miles';
+  document.getElementById('s-colour').textContent = state.colourLabel + (state.colourCost>0?' (+£'+state.colourCost.toFixed(2)+' p/m)':'');
+  var ck = document.getElementById('mchk'), mv = document.getElementById('s-mval');
   if(state.maint){ck.checked=true;ck.disabled=false;mv.textContent='£'+mc.toFixed(2)+' /mo';}
   else{ck.checked=false;ck.disabled=true;mv.textContent='—';}
-  var base=(bp[state.term]&&bp[state.term][state.mileage])?bp[state.term][state.mileage]:635.15;
-  var adj=state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
-  var total=base+adj+(state.maint?mc:0)+state.colourCost;
-  document.getElementById('s-price').textContent='£'+total.toFixed(2);
+  var adj = state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
+  var totalInc = getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
+  var display = state.leaseType==='business' ? totalInc/VAT : totalInc;
+  document.getElementById('s-price').textContent = '£'+display.toFixed(2);
 }
+
 function goEnq(){
-  document.getElementById('e-term').value=state.term+' months';
-  document.getElementById('e-mile').value=state.mileage.toLocaleString()+' miles';
-  document.getElementById('e-colour').value=state.colourLabel;
-  var base=(bp[state.term]&&bp[state.term][state.mileage])?bp[state.term][state.mileage]:635.15;
-  var adj=state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
-  var total=base+adj+(state.maint?mc:0)+state.colourCost;
-  document.getElementById('e-price').value='£'+total.toFixed(2)+' p/m inc. VAT';
+  if(!state.vehicle){ alert('Please select a vehicle first.'); return; }
+  var adj = state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
+  var totalInc = getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
+  var display = state.leaseType==='business' ? totalInc/VAT : totalInc;
+  var vatStr = state.leaseType==='business' ? ' exc. VAT' : ' inc. VAT';
+  document.getElementById('e-vehicle').value = vehicles[state.vehicle].name;
+  document.getElementById('e-term').value = state.term+' months';
+  document.getElementById('e-mile').value = state.mileage.toLocaleString()+' miles';
+  document.getElementById('e-colour').value = state.colourLabel;
+  document.getElementById('e-price').value = '£'+display.toFixed(2)+' p/m'+vatStr;
   show('p2');
 }
-function goBack(){show('p1');}
-function goSuccess(){document.getElementById('refnum').textContent=Math.floor(100000+Math.random()*900000);show('p3');}
-function resetAll(){show('p1');}
-function show(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.getElementById(id).classList.add('active');}
 
-// Load car image
-var img=new Image();
-img.onload=function(){
-  var box=document.getElementById('imgbox');
-  box.innerHTML='';
-  img.style.cssText='width:100%;max-height:260px;object-fit:cover;display:block';
-  box.appendChild(img);
-};
-img.src='https://cdn.imagin.studio/getImage?customer=selectcarleasing&make=aion&modelFamily=v&modelYear=2026&angle=23';
-
-// Default first colour selected
-var firstColour=document.querySelector('input[name="colour"]');
-if(firstColour){firstColour.checked=true;}
+function goBack(){ show('p1'); }
+function goSuccess(){ document.getElementById('refnum').textContent=Math.floor(100000+Math.random()*900000); show('p3'); }
+function resetAll(){ state.vehicle=null; document.querySelectorAll('.vehicle-card').forEach(function(c){c.classList.remove('selected')}); document.getElementById('config-area').classList.remove('visible'); setTimeout(function(){document.getElementById('config-area').style.display='none'},300); show('p1'); }
+function show(id){ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
 </script>
 </body>
 </html>
