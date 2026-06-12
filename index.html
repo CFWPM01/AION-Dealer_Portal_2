@@ -8,14 +8,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#1a1a1a;min-height:100vh}
-
-/* Topbar */
 .topbar{background:#0d0d1a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
 .brand{color:#fff;font-size:14px;font-weight:600;letter-spacing:0.5px}
 .brand-sub{color:rgba(255,255,255,0.5);font-size:11px;margin-top:1px}
 .scl-tag{color:rgba(255,255,255,0.6);font-size:11px}
-
-/* Personal/Business toggle */
 .lease-type-bar{background:#fff;border-bottom:1px solid #e5e5e5;padding:16px 24px;display:flex;align-items:center;gap:16px}
 .lease-type-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px}
 .toggle-wrap{display:flex;align-items:center;gap:10px}
@@ -26,33 +22,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .toggle-thumb{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
 .toggle-track.business .toggle-thumb{transform:translateX(24px)}
 .vat-note{font-size:11px;color:#888;margin-left:8px}
-
-/* Container */
 .container{max-width:1100px;margin:0 auto;padding:24px}
 .page{display:none}.page.active{display:block}
 
-/* Vehicle selector */
+/* Vehicle selector — searchable dropdown */
 .vehicle-select-wrap{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;margin-bottom:0}
-.vehicle-select-wrap h2{font-size:14px;font-weight:600;color:#0d0d1a;margin-bottom:14px}
-.vehicle-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.vehicle-card{border:2px solid #e5e5e5;border-radius:10px;padding:14px 16px;cursor:pointer;transition:all 0.15s;background:#fff}
-.vehicle-card:hover{border-color:#aaa;background:#fafafa}
-.vehicle-card.selected{border-color:#0d0d1a;background:#f8f8ff}
-.vehicle-card-name{font-size:13px;font-weight:600;color:#0d0d1a;line-height:1.4}
-.vehicle-card-sub{font-size:11px;color:#888;margin-top:3px}
-.vehicle-card-badge{display:inline-block;margin-top:6px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:#f0f0f0;color:#555}
-.vehicle-card.selected .vehicle-card-badge{background:#0d0d1a;color:#fff}
+.vehicle-select-wrap h2{font-size:14px;font-weight:600;color:#0d0d1a;margin-bottom:6px}
+.vehicle-select-hint{font-size:12px;color:#888;margin-bottom:14px}
+.vehicle-dropdown-wrap{position:relative;max-width:560px}
+.vehicle-search-input{width:100%;padding:10px 40px 10px 12px;border:1px solid #d5d5d5;border-radius:8px;font-size:14px;font-family:inherit;color:#1a1a1a;background:#fff;cursor:pointer}
+.vehicle-search-input:focus{outline:none;border-color:#0d0d1a}
+.vehicle-dropdown-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#888;font-size:16px}
+.vehicle-dropdown-list{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid #d5d5d5;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.1);z-index:100;max-height:280px;overflow-y:auto}
+.vehicle-dropdown-list.open{display:block}
+.vehicle-dropdown-item{padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:1px solid #f5f5f5;transition:background 0.1s}
+.vehicle-dropdown-item:last-child{border-bottom:none}
+.vehicle-dropdown-item:hover{background:#f5f5f5}
+.vehicle-dropdown-item.selected{background:#f0f0f8;font-weight:600}
+.vehicle-dropdown-item-name{color:#0d0d1a;font-weight:500}
+.vehicle-dropdown-item-sub{font-size:11px;color:#888;margin-top:2px}
+.vehicle-dropdown-empty{padding:12px 14px;font-size:13px;color:#888;text-align:center}
 
 /* Config layout */
-.config-area{display:none;margin-top:20px}
-.config-area.visible{display:block}
+.config-area{display:none;margin-top:20px;opacity:0;transform:translateY(8px);transition:opacity 0.3s,transform 0.3s}
+.config-area.visible{display:block;opacity:1;transform:translateY(0)}
 .grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
 .left{display:flex;flex-direction:column;gap:16px}
-
 .imgbox{border-radius:12px;border:1px solid #e5e5e5;overflow:hidden;background:#e8eef5;min-height:220px;display:flex;align-items:center;justify-content:center}
 .imgbox img{width:100%;display:block;object-fit:cover}
 .imgfail{text-align:center;padding:2rem;color:#888;font-size:13px}
-
 .cartitle{font-size:18px;font-weight:600;color:#0d0d1a}
 .carsub{font-size:12px;color:#666;margin-top:4px}
 .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px}
@@ -64,8 +62,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rgrp{display:flex;gap:16px}
 .ropt{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#333}
 .ropt input{accent-color:#0d0d1a;width:15px;height:15px;cursor:pointer}
-
-/* Colour panel */
 .colour-btn{width:100%;padding:10px;border:1px solid #d5d5d5;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;color:#333;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.12s}
 .colour-btn:hover{background:#f5f5f5}
 .colour-panel{display:none;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;margin-top:4px}
@@ -79,8 +75,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .colour-opt-price{font-size:12px;color:#666;white-space:nowrap}
 .colour-opt-price.extra{color:#0d0d1a;font-weight:500}
 .colour-swatch{width:16px;height:16px;border-radius:50%;border:1px solid #ddd;flex-shrink:0}
-
-/* Summary */
 .sumcard{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;position:sticky;top:16px}
 .sumtitle{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:14px}
 .srow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
@@ -88,7 +82,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .slbl{color:#666}
 .sval{color:#0d0d1a;font-weight:500;text-align:right}
 .inc{font-size:11px;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:10px}
-.biz-badge{font-size:11px;color:#1d4ed8;background:#dbeafe;padding:2px 8px;border-radius:10px}
 .mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
 .mrow input[type=checkbox]{accent-color:#0d0d1a;width:14px;height:14px}
 .pblock{margin-top:14px;padding-top:14px;border-top:1px solid #e5e5e5}
@@ -99,12 +92,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .enqbtn{width:100%;margin-top:14px;padding:12px;background:#0d0d1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.15s}
 .enqbtn:hover{opacity:0.85}
 
-/* Enquiry */
-.fw{max-width:660px}
+/* Enquiry form */
+.fw{max-width:680px}
 .ftitle{font-size:20px;font-weight:600;margin-bottom:6px;color:#0d0d1a}
 .fsub{font-size:13px;color:#666;margin-bottom:20px}
-.alert-box{background:#fff8e1;border:1px solid #f59e0b;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400e;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
-.alert-box i{font-size:16px;margin-top:1px;flex-shrink:0;color:#f59e0b}
+
+/* Orange consent boxes */
+.consent-box{background:#fff8f0;border:1.5px solid #f97316;border-radius:10px;padding:16px;margin-bottom:16px}
+.consent-box-title{font-size:13px;font-weight:600;color:#9a3412;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.consent-box-title i{color:#f97316;font-size:15px}
+.consent-box-body{font-size:13px;color:#7c2d12;line-height:1.6;margin-bottom:12px}
+.consent-check-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#7c2d12;cursor:pointer}
+.consent-check-row input[type=checkbox]{width:16px;height:16px;margin-top:2px;accent-color:#f97316;cursor:pointer;flex-shrink:0}
+.consent-check-row span{line-height:1.5}
+.consent-required-badge{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:#f97316;padding:1px 7px;border-radius:10px;margin-left:8px;vertical-align:middle;text-transform:uppercase;letter-spacing:0.4px}
+.consent-error{font-size:11px;color:#dc2626;margin-top:6px;display:none}
+.consent-error.show{display:block}
+
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .frow.full{grid-template-columns:1fr}
 .frow.three{grid-template-columns:1fr 1fr 1fr}
@@ -114,23 +118,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{outline:none;border-color:#0d0d1a}
 .fgrp input[readonly]{background:#f8f8f8;color:#666}
 .fgrp textarea{resize:vertical;min-height:80px}
+.section-label{font-size:11px;font-weight:700;color:#0d0d1a;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e5e5e5}
 .deal-box{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px;margin-bottom:14px}
 .deal-box .ds-title{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px}
 .subbtn{padding:11px 28px;background:#0d0d1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}
 .subbtn:hover{opacity:0.85}
 .backbtn{padding:11px 22px;background:#fff;color:#333;border:1px solid #d5d5d5;border-radius:8px;font-size:14px;cursor:pointer;margin-right:10px;margin-top:4px}
 .backbtn:hover{background:#f5f5f5}
-
-/* Success */
 .sw{text-align:center;padding:4rem 1rem}
 .st{font-size:20px;font-weight:600;margin-bottom:8px;color:#0d0d1a}
 .ss{font-size:14px;color:#666;line-height:1.6}
 .success-icon{width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
 .success-icon i{font-size:32px;color:#15803d}
-
-/* Animate config area in */
-.config-area{opacity:0;transform:translateY(8px);transition:opacity 0.3s,transform 0.3s}
-.config-area.visible{display:block;opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -143,7 +142,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="scl-tag">Dealer pricing tool — internal use only</div>
 </div>
 
-<!-- Personal / Business toggle -->
 <div class="lease-type-bar">
   <span class="lease-type-label">Lease type</span>
   <div class="toggle-wrap">
@@ -161,32 +159,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- PAGE 1: CONFIG -->
 <div id="p1" class="page active">
 
-  <!-- Vehicle selector -->
   <div class="vehicle-select-wrap">
     <h2>Select vehicle</h2>
-    <div class="vehicle-options">
-      <div class="vehicle-card" id="vc-standard" onclick="selectVehicle('standard')">
-        <div class="vehicle-card-name">AION V SUV 150kW Advanced 75kWh 5dr Auto</div>
-        <div class="vehicle-card-sub">2026 · Electric · Auto</div>
-        <span class="vehicle-card-badge">Standard</span>
-      </div>
-      <div class="vehicle-card" id="vc-exec" onclick="selectVehicle('exec')">
-        <div class="vehicle-card-name">AION V SUV 150kW Advanced 75kWh 5dr Auto</div>
-        <div class="vehicle-card-sub">2026 · Electric · Auto</div>
-        <span class="vehicle-card-badge">Executive Pack</span>
-      </div>
+    <p class="vehicle-select-hint">Search or select from the list below to begin configuring a deal</p>
+    <div class="vehicle-dropdown-wrap" id="vdropwrap">
+      <input type="text" class="vehicle-search-input" id="vehicle-search" placeholder="Search vehicles…" autocomplete="off" onclick="openVehicleDropdown()" oninput="filterVehicles(this.value)" readonly>
+      <i class="ti ti-chevron-down vehicle-dropdown-arrow" id="vdrop-chevron"></i>
+      <div class="vehicle-dropdown-list" id="vehicle-dropdown-list"></div>
     </div>
   </div>
 
-  <!-- Config area — hidden until vehicle selected -->
   <div class="config-area" id="config-area">
     <div class="grid">
       <div class="left">
-
         <div class="imgbox" id="imgbox">
           <div class="imgfail" id="imgfail"><i class="ti ti-car" style="font-size:36px;display:block;margin-bottom:8px"></i>AION V SUV 2026</div>
         </div>
-
         <div>
           <div class="cartitle" id="car-title">AION V SUV</div>
           <div class="carsub" id="car-sub">150kW Advanced 75kWh 5dr Auto [2026]</div>
@@ -233,7 +221,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
         </div>
 
-        <!-- Colour & Options -->
         <div class="card">
           <div class="clabel">Colour, trim and options</div>
           <button class="colour-btn" onclick="toggleColour()">
@@ -278,7 +265,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
       </div>
 
-      <!-- Summary panel -->
       <div>
         <div class="sumcard">
           <div class="sumtitle">Your deal summary</div>
@@ -316,29 +302,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="p2" class="page">
   <div class="fw">
     <div class="ftitle">Sales enquiry form</div>
-    <div class="fsub">Complete the details below and submit to the leasing team.</div>
-    <div class="alert-box">
-      <i class="ti ti-info-circle"></i>
-      <span>Please inform the customer, as they pass their details on, that someone from <strong>Select Car Leasing</strong> will contact them to arrange the finance.</span>
+    <div class="fsub">Complete all required fields and confirm both acknowledgements before submitting.</div>
+
+    <!-- Consent Box 1 — MANDATORY -->
+    <div class="consent-box">
+      <div class="consent-box-title">
+        <i class="ti ti-info-circle"></i>
+        Finance arrangement notice
+        <span class="consent-required-badge">Required</span>
+      </div>
+      <div class="consent-box-body">
+        Please inform the customer that someone from <strong>Select Car Leasing</strong> will contact them directly to arrange the finance for this vehicle. The customer must be happy with this before you proceed.
+      </div>
+      <label class="consent-check-row">
+        <input type="checkbox" id="consent1">
+        <span>I confirm I have informed the customer and they are happy for Select Car Leasing to contact them to arrange finance.</span>
+      </label>
+      <div class="consent-error" id="consent1-error">⚠ You must confirm this before submitting the enquiry.</div>
     </div>
+
+    <!-- Consent Box 2 — OPTIONAL -->
+    <div class="consent-box">
+      <div class="consent-box-title">
+        <i class="ti ti-mail"></i>
+        Marketing preferences
+      </div>
+      <div class="consent-box-body">
+        Please read the following statement to the customer:<br><br>
+        <em>"Select Car Leasing will sometimes send you emails about car tips, special offers, news, vehicle reviews, and other relevant information, in accordance with Select Car Leasing's privacy policy. Simply tick the box if you do wish to receive them."</em>
+      </div>
+      <label class="consent-check-row">
+        <input type="checkbox" id="consent2">
+        <span>The customer wishes to receive marketing emails from Select Car Leasing.</span>
+      </label>
+    </div>
+
+    <!-- Salesperson details -->
+    <div style="margin-bottom:10px"><div class="section-label">Salesperson details</div></div>
     <div class="frow">
-      <div class="fgrp"><label>Salesperson name</label><input type="text" placeholder="Full name"></div>
+      <div class="fgrp"><label>First name</label><input type="text" id="sp-firstname" placeholder="First name"></div>
+      <div class="fgrp"><label>Surname</label><input type="text" id="sp-surname" placeholder="Surname"></div>
+    </div>
+    <div class="frow" style="margin-bottom:20px">
       <div class="fgrp"><label>Dealer</label>
         <select><option value="">— Select dealer —</option><option>Dealer A</option><option>Dealer B</option></select>
       </div>
+      <div></div>
+    </div>
+
+    <!-- Customer details -->
+    <div style="margin-bottom:10px"><div class="section-label">Customer details</div></div>
+    <div class="frow">
+      <div class="fgrp"><label>First name</label><input type="text" id="cust-firstname" placeholder="First name"></div>
+      <div class="fgrp"><label>Surname</label><input type="text" id="cust-surname" placeholder="Surname"></div>
     </div>
     <div class="frow">
-      <div class="fgrp"><label>Customer name</label><input type="text" placeholder="Full name"></div>
-      <div class="fgrp"><label>Customer email</label><input type="email" placeholder="email@example.com"></div>
+      <div class="fgrp"><label>Email address</label><input type="email" placeholder="email@example.com"></div>
+      <div class="fgrp"><label>Phone number</label><input type="tel" placeholder="07xxx xxxxxx"></div>
     </div>
-    <div class="frow">
-      <div class="fgrp"><label>Customer phone</label><input type="tel" placeholder="07xxx xxxxxx"></div>
+    <div class="frow" style="margin-bottom:20px">
       <div class="fgrp"><label>Lease type</label>
         <select><option>Personal Contract Hire</option><option>Business Contract Hire</option></select>
       </div>
+      <div></div>
     </div>
+
+    <!-- Deal details -->
+    <div style="margin-bottom:10px"><div class="section-label">Deal details</div></div>
     <div class="deal-box">
-      <div class="ds-title">Deal details</div>
       <div class="frow three" style="margin-bottom:0">
         <div class="fgrp"><label>Vehicle</label><input type="text" id="e-vehicle" readonly></div>
         <div class="fgrp"><label>Term</label><input type="text" id="e-term" readonly></div>
@@ -349,9 +380,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fgrp"><label>Monthly price</label><input type="text" id="e-price" readonly></div>
       </div>
     </div>
-    <div class="frow full">
+
+    <div class="frow full" style="margin-bottom:20px">
       <div class="fgrp"><label>Additional notes</label><textarea placeholder="Any specific customer requirements, timeline, questions…"></textarea></div>
     </div>
+
     <div>
       <button class="backbtn" onclick="goBack()">← Back to pricing</button>
       <button class="subbtn" onclick="goSuccess()">Submit enquiry</button>
@@ -370,53 +403,82 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-</div><!-- /container -->
+</div>
 
 <script>
 var VAT = 1.2;
-var state = {
-  term: 48, mileage: 25000, initial: 12, maint: false,
-  colourCost: 0, colourLabel: 'Arctic White',
-  vehicle: null, leaseType: 'personal'
-};
+var state = { term:48, mileage:25000, initial:12, maint:false, colourCost:0, colourLabel:'Arctic White', vehicle:null, leaseType:'personal' };
 
-var vehicles = {
-  standard: {
-    name: 'AION V SUV 150kW Advanced 75kWh 5dr Auto',
-    sub: '150kW Advanced 75kWh 5dr Auto [2026]',
-    p11d: '£37,880.00',
-    shortName: 'AION V SUV — Standard'
-  },
-  exec: {
-    name: 'AION V SUV 150kW Advanced 75kWh 5dr Auto [Executive Pack]',
-    sub: '150kW Advanced 75kWh 5dr Auto [Executive Pack] [2026]',
-    p11d: '£37,880.00',
-    shortName: 'AION V SUV — Executive Pack'
-  }
-};
+var vehicles = [
+  { id:'standard', name:'AION V SUV 150kW Advanced 75kWh 5dr Auto', sub:'150kW Advanced 75kWh 5dr Auto [2026] · Standard', badge:'Standard', p11d:'£37,880.00' },
+  { id:'exec', name:'AION V SUV 150kW Advanced 75kWh 5dr Auto [Executive Pack]', sub:'150kW Advanced 75kWh 5dr Auto [Executive Pack] [2026]', badge:'Executive Pack', p11d:'£37,880.00' }
+];
 
 var bp = {
-  24: {5000:720,8000:710,10000:695,15000:675,20000:660,25000:648,30000:635},
-  36: {5000:690,8000:678,10000:665,15000:648,20000:635,25000:622,30000:608},
-  48: {5000:680,8000:665,10000:650,15000:640,20000:638,25000:635,30000:620}
+  24:{5000:720,8000:710,10000:695,15000:675,20000:660,25000:648,30000:635},
+  36:{5000:690,8000:678,10000:665,15000:648,20000:635,25000:622,30000:608},
+  48:{5000:680,8000:665,10000:650,15000:640,20000:638,25000:635,30000:620}
 };
 var mc = 75.48;
 
-function selectVehicle(v) {
-  state.vehicle = v;
-  document.querySelectorAll('.vehicle-card').forEach(function(c){c.classList.remove('selected')});
-  document.getElementById('vc-'+v).classList.add('selected');
-  var vd = vehicles[v];
-  document.getElementById('car-title').textContent = 'AION V SUV' + (v==='exec' ? ' — Executive Pack' : '');
+// --- Vehicle dropdown ---
+function buildDropdown(filter) {
+  var list = document.getElementById('vehicle-dropdown-list');
+  var filtered = filter ? vehicles.filter(function(v){ return v.name.toLowerCase().indexOf(filter.toLowerCase()) > -1; }) : vehicles;
+  if(filtered.length === 0) {
+    list.innerHTML = '<div class="vehicle-dropdown-empty">No vehicles found</div>';
+  } else {
+    list.innerHTML = filtered.map(function(v){
+      return '<div class="vehicle-dropdown-item'+(state.vehicle===v.id?' selected':'')+'" onclick="selectVehicle(\''+v.id+'\')">'
+        +'<div class="vehicle-dropdown-item-name">'+v.name+'</div>'
+        +'<div class="vehicle-dropdown-item-sub">'+v.sub+'</div>'
+        +'</div>';
+    }).join('');
+  }
+}
+
+function openVehicleDropdown() {
+  var input = document.getElementById('vehicle-search');
+  input.removeAttribute('readonly');
+  input.value = '';
+  buildDropdown('');
+  document.getElementById('vehicle-dropdown-list').classList.add('open');
+  document.getElementById('vdrop-chevron').className = 'ti ti-chevron-up vehicle-dropdown-arrow';
+}
+
+function filterVehicles(val) {
+  buildDropdown(val);
+  document.getElementById('vehicle-dropdown-list').classList.add('open');
+}
+
+function selectVehicle(id) {
+  state.vehicle = id;
+  var vd = vehicles.find(function(v){ return v.id===id; });
+  var input = document.getElementById('vehicle-search');
+  input.value = vd.name;
+  input.setAttribute('readonly','');
+  document.getElementById('vehicle-dropdown-list').classList.remove('open');
+  document.getElementById('vdrop-chevron').className = 'ti ti-chevron-down vehicle-dropdown-arrow';
+  document.getElementById('car-title').textContent = 'AION V SUV' + (id==='exec'?' — Executive Pack':'');
   document.getElementById('car-sub').textContent = vd.sub;
-  document.getElementById('s-vehicle').textContent = v==='exec' ? 'Executive Pack' : 'Standard';
+  document.getElementById('s-vehicle').textContent = vd.badge;
   document.getElementById('s-p11d').textContent = vd.p11d;
   var ca = document.getElementById('config-area');
   ca.style.display = 'block';
-  setTimeout(function(){ca.classList.add('visible')}, 10);
+  setTimeout(function(){ ca.classList.add('visible'); }, 10);
   loadImage();
   upd();
 }
+
+document.addEventListener('click', function(e) {
+  if(!document.getElementById('vdropwrap').contains(e.target)) {
+    document.getElementById('vehicle-dropdown-list').classList.remove('open');
+    document.getElementById('vdrop-chevron').className = 'ti ti-chevron-down vehicle-dropdown-arrow';
+    var input = document.getElementById('vehicle-search');
+    if(!state.vehicle) input.value = '';
+    input.setAttribute('readonly','');
+  }
+});
 
 function loadImage() {
   var img = new Image();
@@ -429,30 +491,26 @@ function loadImage() {
   img.src = 'https://cdn.imagin.studio/getImage?customer=selectcarleasing&make=aion&modelFamily=v&modelYear=2026&angle=23';
 }
 
-function toggleLease() {
-  setLeaseType(state.leaseType === 'personal' ? 'business' : 'personal');
-}
-
-function setLeaseType(t) {
+function toggleLease(){ setLeaseType(state.leaseType==='personal'?'business':'personal'); }
+function setLeaseType(t){
   state.leaseType = t;
   var track = document.getElementById('lease-toggle');
-  var lblP = document.getElementById('lbl-personal');
-  var lblB = document.getElementById('lbl-business');
-  var vatNote = document.getElementById('vat-note');
-  if(t === 'business') {
+  if(t==='business'){
     track.classList.add('business');
-    lblP.classList.remove('active'); lblB.classList.add('active');
-    vatNote.style.display = 'inline';
-    document.getElementById('s-vat-note').style.display = 'inline-block';
-    document.getElementById('s-pmo').textContent = 'per month exc. VAT';
-    document.getElementById('s-lease').textContent = 'Business Contract Hire';
+    document.getElementById('lbl-personal').classList.remove('active');
+    document.getElementById('lbl-business').classList.add('active');
+    document.getElementById('vat-note').style.display='inline';
+    document.getElementById('s-vat-note').style.display='inline-block';
+    document.getElementById('s-pmo').textContent='per month exc. VAT';
+    document.getElementById('s-lease').textContent='Business Contract Hire';
   } else {
     track.classList.remove('business');
-    lblP.classList.add('active'); lblB.classList.remove('active');
-    vatNote.style.display = 'none';
-    document.getElementById('s-vat-note').style.display = 'none';
-    document.getElementById('s-pmo').textContent = 'per month inc. VAT';
-    document.getElementById('s-lease').textContent = 'Personal Contract Hire';
+    document.getElementById('lbl-personal').classList.add('active');
+    document.getElementById('lbl-business').classList.remove('active');
+    document.getElementById('vat-note').style.display='none';
+    document.getElementById('s-vat-note').style.display='none';
+    document.getElementById('s-pmo').textContent='per month inc. VAT';
+    document.getElementById('s-lease').textContent='Personal Contract Hire';
   }
   upd();
 }
@@ -460,62 +518,80 @@ function setLeaseType(t) {
 function setPill(el,g){
   document.querySelectorAll('[data-g="'+g+'"]').forEach(function(p){p.classList.remove('on')});
   el.classList.add('on');
-  state[g] = parseInt(el.dataset.v);
+  state[g]=parseInt(el.dataset.v);
   upd();
 }
-
-function setMaint(el){ state.maint = el.value==='yes'; upd(); }
-
-function setColour(el){
-  state.colourCost = parseFloat(el.value)||0;
-  state.colourLabel = el.dataset.label;
-  upd();
-}
-
+function setMaint(el){ state.maint=el.value==='yes'; upd(); }
+function setColour(el){ state.colourCost=parseFloat(el.value)||0; state.colourLabel=el.dataset.label; upd(); }
 function toggleColour(){
-  var panel = document.getElementById('colour-panel');
-  var chev = document.getElementById('colour-chevron');
+  var panel=document.getElementById('colour-panel');
+  var chev=document.getElementById('colour-chevron');
   panel.classList.toggle('open');
-  chev.className = panel.classList.contains('open') ? 'ti ti-chevron-up' : 'ti ti-chevron-down';
-  chev.style.marginLeft = 'auto';
+  chev.className=panel.classList.contains('open')?'ti ti-chevron-up':'ti ti-chevron-down';
+  chev.style.marginLeft='auto';
 }
-
-function getBasePrice(){
-  return (bp[state.term] && bp[state.term][state.mileage]) ? bp[state.term][state.mileage] : 635.15;
-}
-
+function getBasePrice(){ return (bp[state.term]&&bp[state.term][state.mileage])?bp[state.term][state.mileage]:635.15; }
 function upd(){
-  document.getElementById('s-init').textContent = state.initial+' months';
-  document.getElementById('s-term').textContent = state.term+' months';
-  document.getElementById('s-mile').textContent = state.mileage.toLocaleString()+' miles';
-  document.getElementById('s-colour').textContent = state.colourLabel + (state.colourCost>0?' (+£'+state.colourCost.toFixed(2)+' p/m)':'');
-  var ck = document.getElementById('mchk'), mv = document.getElementById('s-mval');
+  document.getElementById('s-init').textContent=state.initial+' months';
+  document.getElementById('s-term').textContent=state.term+' months';
+  document.getElementById('s-mile').textContent=state.mileage.toLocaleString()+' miles';
+  document.getElementById('s-colour').textContent=state.colourLabel+(state.colourCost>0?' (+£'+state.colourCost.toFixed(2)+' p/m)':'');
+  var ck=document.getElementById('mchk'),mv=document.getElementById('s-mval');
   if(state.maint){ck.checked=true;ck.disabled=false;mv.textContent='£'+mc.toFixed(2)+' /mo';}
   else{ck.checked=false;ck.disabled=true;mv.textContent='—';}
-  var adj = state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
-  var totalInc = getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
-  var display = state.leaseType==='business' ? totalInc/VAT : totalInc;
-  document.getElementById('s-price').textContent = '£'+display.toFixed(2);
+  var adj=state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
+  var totalInc=getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
+  var display=state.leaseType==='business'?totalInc/VAT:totalInc;
+  document.getElementById('s-price').textContent='£'+display.toFixed(2);
 }
 
 function goEnq(){
   if(!state.vehicle){ alert('Please select a vehicle first.'); return; }
-  var adj = state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
-  var totalInc = getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
-  var display = state.leaseType==='business' ? totalInc/VAT : totalInc;
-  var vatStr = state.leaseType==='business' ? ' exc. VAT' : ' inc. VAT';
-  document.getElementById('e-vehicle').value = vehicles[state.vehicle].name;
-  document.getElementById('e-term').value = state.term+' months';
-  document.getElementById('e-mile').value = state.mileage.toLocaleString()+' miles';
-  document.getElementById('e-colour').value = state.colourLabel;
-  document.getElementById('e-price').value = '£'+display.toFixed(2)+' p/m'+vatStr;
+  var adj=state.initial<=3?18:state.initial<=6?8:state.initial<=9?2:0;
+  var totalInc=getBasePrice()+adj+(state.maint?mc:0)+state.colourCost;
+  var display=state.leaseType==='business'?totalInc/VAT:totalInc;
+  var vatStr=state.leaseType==='business'?' exc. VAT':' inc. VAT';
+  var vd=vehicles.find(function(v){return v.id===state.vehicle;});
+  document.getElementById('e-vehicle').value=vd.name;
+  document.getElementById('e-term').value=state.term+' months';
+  document.getElementById('e-mile').value=state.mileage.toLocaleString()+' miles';
+  document.getElementById('e-colour').value=state.colourLabel;
+  document.getElementById('e-price').value='£'+display.toFixed(2)+' p/m'+vatStr;
+  // reset consent errors
+  document.getElementById('consent1-error').classList.remove('show');
   show('p2');
 }
 
 function goBack(){ show('p1'); }
-function goSuccess(){ document.getElementById('refnum').textContent=Math.floor(100000+Math.random()*900000); show('p3'); }
-function resetAll(){ state.vehicle=null; document.querySelectorAll('.vehicle-card').forEach(function(c){c.classList.remove('selected')}); document.getElementById('config-area').classList.remove('visible'); setTimeout(function(){document.getElementById('config-area').style.display='none'},300); show('p1'); }
-function show(id){ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+
+function goSuccess(){
+  // Validate mandatory consent
+  var c1 = document.getElementById('consent1').checked;
+  if(!c1){
+    document.getElementById('consent1-error').classList.add('show');
+    document.getElementById('consent1').closest('.consent-box').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  document.getElementById('consent1-error').classList.remove('show');
+  document.getElementById('refnum').textContent=Math.floor(100000+Math.random()*900000);
+  show('p3');
+}
+
+function resetAll(){
+  state.vehicle=null;
+  document.getElementById('vehicle-search').value='';
+  document.getElementById('vehicle-search').setAttribute('readonly','');
+  document.getElementById('config-area').classList.remove('visible');
+  document.getElementById('consent1').checked=false;
+  document.getElementById('consent2').checked=false;
+  setTimeout(function(){document.getElementById('config-area').style.display='none';},300);
+  show('p1');
+}
+function show(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
 </script>
 </body>
 </html>
