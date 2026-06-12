@@ -344,9 +344,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="fgrp"><label>Surname</label><input type="text" id="sp-surname" placeholder="Surname"></div>
     </div>
     <div class="frow" style="margin-bottom:20px">
-      <div class="fgrp"><label>Dealer</label>
-        <select><option value="">— Select dealer —</option><option>Dealer A</option><option>Dealer B</option></select>
-      </div>
+      <div class="fgrp"><label>Dealer name</label><input type="text" placeholder="Enter dealer name"></div>
       <div></div>
     </div>
 
@@ -360,13 +358,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="fgrp"><label>Email address</label><input type="email" placeholder="email@example.com"></div>
       <div class="fgrp"><label>Phone number</label><input type="tel" placeholder="07xxx xxxxxx"></div>
     </div>
-    <div class="frow" style="margin-bottom:20px">
-      <div class="fgrp"><label>Lease type</label>
-        <select><option>Personal Contract Hire</option><option>Business Contract Hire</option></select>
-      </div>
-      <div></div>
-    </div>
-
     <!-- Deal details -->
     <div style="margin-bottom:10px"><div class="section-label">Deal details</div></div>
     <div class="deal-box">
@@ -375,9 +366,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fgrp"><label>Term</label><input type="text" id="e-term" readonly></div>
         <div class="fgrp"><label>Annual mileage</label><input type="text" id="e-mile" readonly></div>
       </div>
-      <div class="frow" style="margin-top:10px;margin-bottom:0">
+      <div class="frow three" style="margin-top:10px;margin-bottom:0">
         <div class="fgrp"><label>Colour</label><input type="text" id="e-colour" readonly></div>
         <div class="fgrp"><label>Monthly price</label><input type="text" id="e-price" readonly></div>
+        <div class="fgrp"><label>Lease type</label><input type="text" id="e-leasetype" readonly></div>
       </div>
     </div>
 
@@ -557,6 +549,7 @@ function goEnq(){
   document.getElementById('e-mile').value=state.mileage.toLocaleString()+' miles';
   document.getElementById('e-colour').value=state.colourLabel;
   document.getElementById('e-price').value='£'+display.toFixed(2)+' p/m'+vatStr;
+  document.getElementById('e-leasetype').value=state.leaseType==='business'?'Business Contract Hire':'Personal Contract Hire';
   // reset consent errors
   document.getElementById('consent1-error').classList.remove('show');
   show('p2');
